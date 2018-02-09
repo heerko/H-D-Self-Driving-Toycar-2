@@ -1,15 +1,18 @@
-
-
-// Adafruit Motor shield library
-// copyright Adafruit Industries LLC, 2009
-// this code is public domain, enjoy!
+/**
+ * In plaats van de zelf geschreven code uit het vorige voorbeeld
+ * gebruiken we in deze sketch een library voor de ultrasoon sensor.
+ * Dit maakt het gebruik van de sensor iets robuuster.
+ * Installeer de library door naar Sketch > Import Library > Manage Libraries...
+ * te gaan en te zoeken naar 'ST_HW_HC_SR04'. Druk install.
+ * De sensor blijft aangesloten op de SERVO_1 en SERVO_2 pinnen.
+ */
 
 #include <AFMotor.h>
 #include <ST_HW_HC_SR04.h>
 
 #define TRIGGER_PIN 9
 #define ECHO_PIN 10
-ST_HW_HC_SR04 ultrasonicSensor(TRIGGER_PIN, ECHO_PIN); // ST_HW_HC_SR04(TRIG, ECHO)
+ST_HW_HC_SR04 ultrasonicSensor(TRIGGER_PIN, ECHO_PIN);
 
 #define LEFT BACKWARD
 #define RIGHT FORWARD
@@ -38,7 +41,7 @@ void setup() {
 
 void loop() {
   int cm = pulseToCm( ultrasonicSensor.getHitTime() ); // get the ping time and convert to cm.
-  if ( cm == 0 || cm > 15 ) { // there doesn't seem to be an obstacle in front of the car. 0 is either too far, or we're right on top of it. 
+  if ( cm == 0 || cm > 15 ) { // there doesn't seem to be an obstacle in front of the car. 0 is either too far, or we're right on top of it.
     motor.setSpeed( 180 );
     motor.run( FORWARD );
 
